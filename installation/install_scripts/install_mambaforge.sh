@@ -9,7 +9,7 @@ wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge
 bash Miniforge3-$(uname)-$(uname -m).sh -b
 source ~/miniforge3/bin/activate
 conda init
-conda install mamba -c conda-forge
+conda install mamba -c conda-forge -y
 conda config --set auto_activate_base false
 conda deactivate
 rm -rf Miniforge3-$(uname)-$(uname -m).sh
