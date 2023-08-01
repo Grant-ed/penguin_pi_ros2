@@ -35,6 +35,8 @@ echo "---Building packages---"
 echo ""
 sleep 3
 colcon build --symlink-install
+source ~/.bashrc
+a
 
 ## Wrap up
 echo "Thank you for installing"
