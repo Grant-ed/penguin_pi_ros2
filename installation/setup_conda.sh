@@ -12,8 +12,7 @@ sudo apt upgrade -y
 sudo apt install -y git python3-pip pre-commit mesa-utils
 
 ## Make workspace
-mkdir ~/PenguinPiRos
-cd ~/PenguinPiRos
+cd ~/
 
 ## Clone PenguinPi repo
 echo ""
@@ -23,10 +22,10 @@ sleep 3
 git clone --recurse-submodules https://github.com/Grant-ed/penguin_pi_urdf.git
 
 ## Download and install mambaforge
-source ~/PenguinPiRos/penguin_pi_urdf/installation/install_scripts/install_mambaforge.sh
+source ~/penguin_pi_urdf/installation/install_scripts/install_mambaforge.sh
 
 ## Create ros_env development environment
-source ~/PenguinPiRos/penguin_pi_urdf/installation/install_scripts/install_conda_env.sh
+source ~/penguin_pi_urdf/installation/install_scripts/install_conda_env.sh
 
 ## Create an alias for ease
 echo "alias a='conda activate penguinpi_env && source install/setup.bash'" >> ~/.bashrc
