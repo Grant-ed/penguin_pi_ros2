@@ -6,19 +6,19 @@ dependencies:
   - python=3.10
   - ros-humble-desktop
   - colcon-common-extensions
-  - ca-certificates
-  - openssl
+  # - ca-certificates
+  # - openssl
   - compilers
-  - cmake=3.21
+  - cmake
   - pkg-config
   - make
   - ninja
-  - numpy==1.23
+  # - numpy==1.23
   - typing-extensions # for some reason, not installed in base python?
-  - pip
-  - pip:
-    # package requirements
-    - simplejpeg
+  # - pip
+  # - pip:
+  #   # package requirements
+  #   - simplejpeg
 variables:
   # fix for WSL RVIZ2
   LIBGL_ALWAYS_INDIRECT:
