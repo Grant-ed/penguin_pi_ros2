@@ -1,3 +1,5 @@
 # package requirements (alphabetical)
+mesa-libgl-cos6-x86_64 # for gazebo sim RVIZ plugins
+ros-humble-gazebo-ros-pkgs
 ros-humble-joint-state-publisher
 ros-humble-xacro
