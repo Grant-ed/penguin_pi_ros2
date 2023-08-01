@@ -6,6 +6,10 @@ echo ""
 sleep 3
 cd ~/penguin_pi_urdf
 
+mamba init
+eval "$(conda shell.bash hook)"
+source ~/miniforge3/etc/profile.d/mamba.sh
+
 # https://robostack.github.io/GettingStarted.html
 mamba env create --name penguinpi_env --file installation/humble_py310_dev_env.yml
 mamba activate penguinpi_env
