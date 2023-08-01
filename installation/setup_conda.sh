@@ -28,7 +28,7 @@ source ~/penguin_pi_urdf/installation/install_scripts/install_mambaforge.sh
 source ~/penguin_pi_urdf/installation/install_scripts/install_conda_env.sh
 
 ## Create an alias for ease
-echo "alias a='conda activate penguinpi_env && source install/setup.bash'" >> ~/.bashrc
+echo "alias a='mamba activate penguinpi_env && source install/setup.bash'" >> ~/.bashrc
 
 echo ""
 echo "---Building packages---"
