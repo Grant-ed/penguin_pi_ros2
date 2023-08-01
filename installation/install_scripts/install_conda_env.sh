@@ -4,7 +4,7 @@ echo ""
 echo "---Creating penguinpi env---"
 echo ""
 sleep 3
-cd ~/PenguinPiRos
+cd ~/PenguinPiRos/penguin_pi_urdf
 mamba env create --name penguinpi_env --file installation/humble_py310_dev_env.yml
 conda activate penguinpi_env
 conda config --env --add channels conda-forge
