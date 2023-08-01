@@ -10,6 +10,8 @@ chmod u+x ./setup_conda.sh
 ```
 Before running ros in a new terminal, or after rebuilding any packages, ALWAYS remember to re-source with `source install/setup.bash`, or just `a` if you installed using the installation script. A quick command to run to check everything installed correctly:
 ```
+source ~/.bashrc # Only need to run this command if using the same shell as used in the install script
 cd ~/penguin_pi_urdf/
+a
 ros2 launch penguin_pi_urdf display.launch.py
 ```
