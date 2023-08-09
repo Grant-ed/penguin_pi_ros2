@@ -73,7 +73,7 @@ class MicrocontrollerNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = MicrocontrollerNode()
-    rclpy.on_shutdown(node.on_shutdown)
+    rclpy.get_default_context().on_shutdown(node.on_shutdown)
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
