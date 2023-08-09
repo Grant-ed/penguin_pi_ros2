@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16
-from example_interfaces.srv import GetInt16  
+from penguin_pi_interfaces.srv import GetInt16
 
 # Importing the penguinPi library
 import penguinPi as ppi
@@ -75,6 +75,7 @@ def main(args=None):
     node = MicrocontrollerNode()
     rclpy.on_shutdown(node.on_shutdown)
     rclpy.spin(node)
+    node.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
