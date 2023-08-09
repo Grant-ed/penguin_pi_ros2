@@ -7,10 +7,25 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
+# Generate custom services
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/SetVelocity.srv"
+  "srv/GetEncoder.srv"
+  DEPENDENCIES std_msgs std_srvs
+)
+
+# Install Python scripts
+install(PROGRAMS
+  src/motor_node.py
+  src/uart_manager_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install other directories
 install(
   DIRECTORY src launch rviz config
   DESTINATION share/${PROJECT_NAME}
