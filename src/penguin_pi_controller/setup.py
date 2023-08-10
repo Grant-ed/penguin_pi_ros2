@@ -1,7 +1,7 @@
 from setuptools import setup
 
 package_name = 'penguin_pi_controller'
-submodules = penguin_pi_lib
+submodules = f'{package_name}/penguin_pi_lib'
 
 setup(
     name=package_name,
