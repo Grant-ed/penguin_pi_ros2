@@ -23,7 +23,7 @@ class MinimalClientAsync(Node):
         return future.result()
     
     def timer_callback(self):
-        n=50
+        n=1
         result = timeit.timeit(self.send_request, number=n)
         self.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
 
