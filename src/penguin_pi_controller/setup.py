@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'microcontroller_node = penguin_pi_controller.microcontroller_node:main',
+            'stress_tester = penguin_pi_controller.stress_test_node:main'
         ],
     },
 )
