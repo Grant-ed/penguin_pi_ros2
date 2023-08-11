@@ -31,18 +31,18 @@ class MicrocontrollerNode(Node):
         self.mLeft.get_all()
         self.mRight.get_all()
 
-        # Create Mutually Exclusive Callback Group for UART communication
-        self.uart_callback_group = MutuallyExclusiveCallbackGroup()
+        # # Create Mutually Exclusive Callback Group for UART communication
+        # self.uart_callback_group = MutuallyExclusiveCallbackGroup()
 
         # Services for Motor Getters
-        self.srv_get_velocity_left = self.create_service(GetInt16, 'get_velocity_left', self.callback_get_velocity_left, callback_group=self.uart_callback_group)
-        self.srv_get_velocity_right = self.create_service(GetInt16, 'get_velocity_right', self.callback_get_velocity_right, callback_group=self.uart_callback_group)
-        self.srv_get_encoder_left = self.create_service(GetInt16, 'get_encoder_left', self.callback_get_encoder_left, callback_group=self.uart_callback_group)
-        self.srv_get_encoder_right = self.create_service(GetInt16, 'get_encoder_right', self.callback_get_encoder_right, callback_group=self.uart_callback_group)
+        self.srv_get_velocity_left = self.create_service(GetInt16, 'get_velocity_left', self.callback_get_velocity_left)
+        self.srv_get_velocity_right = self.create_service(GetInt16, 'get_velocity_right', self.callback_get_velocity_right)
+        self.srv_get_encoder_left = self.create_service(GetInt16, 'get_encoder_left', self.callback_get_encoder_left)
+        self.srv_get_encoder_right = self.create_service(GetInt16, 'get_encoder_right', self.callback_get_encoder_right)
 
         # Subscriptions for Motor Setters
-        self.sub_set_velocity_left = self.create_subscription(Int16, 'set_velocity_left', self.callback_set_velocity_left, 10, callback_group=self.uart_callback_group)
-        self.sub_set_velocity_right = self.create_subscription(Int16, 'set_velocity_right', self.callback_set_velocity_right, 10, callback_group=self.uart_callback_group)
+        self.sub_set_velocity_left = self.create_subscription(Int16, 'set_velocity_left', self.callback_set_velocity_left, 10)
+        self.sub_set_velocity_right = self.create_subscription(Int16, 'set_velocity_right', self.callback_set_velocity_right, 10)
 
     def callback_get_velocity_left(self, request, response):
         response.data = self.mLeft.get_velocity()
