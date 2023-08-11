@@ -12,20 +12,25 @@ class MinimalClientAsync(Node):
         self.cli = self.create_client(GetInt16, 'get_encoder_left')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
-        timer_period = 1  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.i = 0
+        self.get_logger().info('service available')
+        #timer_period = 1  # seconds
+        #self.timer = self.create_timer(timer_period, self.timer_callback)
+        #self.i = 0
 
     def send_request(self):
         req = GetInt16.Request()
         future = self.cli.call_async(req)
         rclpy.spin_until_future_complete(self, future)
+        self.get_logger().info(f'response: {future.result().data}')
         return future.result()
-    
+
     def timer_callback(self):
-        n=1
-        result = timeit.timeit('self.send_request', number=n)
-        self.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
+        self.get_logger().info('starting')
+        response = self.send_request()
+        self.get_logger().info(f'response: {response.data}')
+#        n=1
+#        result = timeit.timeit(self.send_request, number=n)
+#        self.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
 
 class MinimalPublisher(Node):
 
@@ -69,7 +74,11 @@ def main(args=None):
     # minimal_publisher.destroy_node()
 
     minimal_client = MinimalClientAsync()
-    rclpy.spin(minimal_client)
+#    rclpy.spin(minimal_client)
+    minimal_client.get_logger().info('starting')
+    n=50
+    result = timeit.timeit(minimal_client.send_request, number=n)
+    minimal_client.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
 
     minimal_client.destroy_node()
 
