@@ -24,7 +24,7 @@ class MinimalClientAsync(Node):
     
     def timer_callback(self):
         n=1
-        result = timeit.timeit(self.send_request, number=n)
+        result = timeit.timeit('self.send_request', number=n)
         self.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
 
 class MinimalPublisher(Node):
