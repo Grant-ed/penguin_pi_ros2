@@ -402,7 +402,7 @@ class Multi(object):
     def __init__(self, address):
         self.address = address;
 
-    def set_velocity(velocity):
+    def set_velocity(self, velocity):
         send_datagram(self.address, 'MULTI_SET_VEL', velocity, 'int8[2]')
         self.velocity = velocity
 
