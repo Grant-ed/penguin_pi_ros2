@@ -406,7 +406,7 @@ class Multi(object):
         send_datagram(self.address, 'MULTI_SET_VEL', velocity, 'int8[2]')
         self.velocity = velocity
 
-    def get_encoders():
+    def get_encoders(self):
         encoders = send_datagram(self.address, 'MULTI_GET_ENC', rxtype='uint16[2]')
         self.encoders = encoders;
         return encoders
