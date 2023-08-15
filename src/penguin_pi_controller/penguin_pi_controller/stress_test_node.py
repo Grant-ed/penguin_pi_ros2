@@ -76,7 +76,7 @@ def main(args=None):
     minimal_client = MinimalClientAsync()
 #    rclpy.spin(minimal_client)
     minimal_client.get_logger().info('starting')
-    n=50
+    n=500
     result = timeit.timeit(minimal_client.send_request, number=n)
     minimal_client.get_logger().info(f"Execution time is {result / n} seconds. Estimated frequency is {n / result} Hz.")
 
