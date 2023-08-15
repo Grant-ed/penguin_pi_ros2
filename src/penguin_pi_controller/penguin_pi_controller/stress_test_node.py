@@ -3,14 +3,15 @@ from rclpy.node import Node
 import timeit
 
 from std_msgs.msg import String
-from penguin_pi_interfaces.srv import GetInt16
+from penguin_pi_interfaces.srv import GetInt16, GetEncoders
 
 class MinimalClientAsync(Node):
 
     def __init__(self):
         super().__init__('minimal_client_async')
-        self.cli = self.create_client(GetInt16, 'get_encoder_left')
-        while not self.cli.wait_for_service(timeout_sec=1.0):
+        self.cli_left_motor = self.create_client(GetInt16, 'get_encoder_left')
+        self.cli_motors = self.create_client(GetEncoders, 'get_encoders')
+        while not self.cli_left_motor.wait_for_service(timeout_sec=1.0) or self.cli_motors.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
         self.get_logger().info('service available')
         #timer_period = 1  # seconds
@@ -18,10 +19,13 @@ class MinimalClientAsync(Node):
         #self.i = 0
 
     def send_request(self):
-        req = GetInt16.Request()
-        future = self.cli.call_async(req)
+        # req = GetInt16.Request()
+        # future = self.cli_left_motor.call_async(req)
+        req = GetEncoders.Request()
+        future = self.cli_motors.call_async(req)
         rclpy.spin_until_future_complete(self, future)
-        self.get_logger().info(f'response: {future.result().data}')
+        # self.get_logger().info(f'response: {future.result().data}')
+        self.get_logger().info(f'response: {future.result().uint16_encoder_values}')
         return future.result()
 
     def timer_callback(self):

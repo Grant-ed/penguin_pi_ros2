@@ -11,6 +11,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/GetInt16.srv"
+  "srv/GetEncoders.srv"
   DEPENDENCIES # Add packages that above messages depend on
 )
 
