@@ -11,7 +11,7 @@ class MinimalClientAsync(Node):
         super().__init__('minimal_client_async')
         self.cli_left_motor = self.create_client(GetInt16, 'get_encoder_left')
         self.cli_motors = self.create_client(GetEncoders, 'get_encoders')
-        while not self.cli_left_motor.wait_for_service(timeout_sec=1.0) or self.cli_motors.wait_for_service(timeout_sec=1.0):
+        while not self.cli_left_motor.wait_for_service(timeout_sec=1.0) or not self.cli_motors.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
         self.get_logger().info('service available')
         #timer_period = 1  # seconds
