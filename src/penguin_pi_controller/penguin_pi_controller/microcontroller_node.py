@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
-from std_msgs.msg import Int16
+from std_msgs.msg import Int16, UInt16MultiArray
 from penguin_pi_interfaces.srv import GetInt16, GetEncoders
 
 # Importing the penguinPi library
@@ -49,6 +49,11 @@ class MicrocontrollerNode(Node):
         self.sub_set_velocity_left = self.create_subscription(Int16, 'set_velocity_left', self.callback_set_velocity_left, 10)
         self.sub_set_velocity_right = self.create_subscription(Int16, 'set_velocity_right', self.callback_set_velocity_right, 10)
 
+        # Publishers
+        self.pub_encoders = self.create_publisher(UInt16MultiArray, 'encoders', 10)
+        timer_period = 0.01  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+
     def callback_get_velocity_left(self, request, response):
         response.data = self.mLeft.get_velocity()
         return response
@@ -74,6 +79,13 @@ class MicrocontrollerNode(Node):
 
     def callback_set_velocity_right(self, msg):
         self.mRight.set_velocity(msg.data)
+
+    def timer_callback(self):
+        # Publish encoder values
+        msg = UInt16MultiArray()
+        msg.data = self.multi.get_encoders()
+        self.get_logger().info(f'Publishing: {msg.data}')
+        self.pub_encoders.publish(msg)
 
     def on_shutdown(self):
         # Properly close the UART connection and stop motors
