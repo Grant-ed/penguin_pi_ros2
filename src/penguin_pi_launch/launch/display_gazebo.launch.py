@@ -2,11 +2,18 @@ import launch
 from launch.substitutions import Command, LaunchConfiguration
 import launch_ros
 import os
+from os.path import join
+from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
-    pkg_share = launch_ros.substitutions.FindPackageShare(package='penguin_pi_urdf').find('penguin_pi_urdf')
-    default_model_path = os.path.join(pkg_share, 'urdf/penguin_pi_urdf.urdf')
-    default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
+    config_share_path = get_package_share_directory("penguin_pi_config")
+    ekf_config_path = join(config_share_path, "config", "ekf.yaml")
+    default_model_path = join(
+        config_share_path, "urdf", "penguin_pi.urdf"
+    )
+    default_rviz_config_path = join(
+        config_share_path, "rviz", "default.rviz"
+    )
     
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
@@ -17,7 +24,7 @@ def generate_launch_description():
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
-        parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+        parameters=[ekf_config_path, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
@@ -37,7 +44,7 @@ def generate_launch_description():
        executable='ekf_node',
        name='ekf_filter_node',
        output='screen',
-       parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+       parameters=[ekf_config_path, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
     return launch.LaunchDescription([

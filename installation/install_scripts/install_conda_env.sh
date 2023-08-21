@@ -4,7 +4,7 @@ echo ""
 echo "---Creating penguinpi env---"
 echo ""
 sleep 3
-cd ~/penguin_pi_urdf
+cd ~/penguin_pi_ros2
 
 mamba init
 eval "$(conda shell.bash hook)"
