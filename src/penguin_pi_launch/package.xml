@@ -7,6 +7,8 @@
   <maintainer email="grantvanbreda@gmail.com">grant</maintainer>
   <license>TODO: License declaration</license>
 
+  <depend>penguin_pi_config</depend>
+
   <export>
     <build_type>ament_python</build_type>
   </export>
