@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16, UInt16MultiArray
-from penguin_pi_interfaces.srv import GetInt16, GetEncoders
+from penguin_pi_interfaces.srv import GetInt16
 
 # Importing the penguinPi library
 import penguin_pi_controller.penguin_pi_lib.penguinPi as ppi
@@ -35,15 +35,9 @@ class MicrocontrollerNode(Node):
         self.mLeft.get_all()
         self.mRight.get_all()
 
-        # # Create Mutually Exclusive Callback Group for UART communication
-        # self.uart_callback_group = MutuallyExclusiveCallbackGroup()
-
         # Services for Motor Getters
         self.srv_get_velocity_left = self.create_service(GetInt16, 'get_velocity_left', self.callback_get_velocity_left)
         self.srv_get_velocity_right = self.create_service(GetInt16, 'get_velocity_right', self.callback_get_velocity_right)
-        self.srv_get_encoder_left = self.create_service(GetInt16, 'get_encoder_left', self.callback_get_encoder_left)
-        self.srv_get_encoder_right = self.create_service(GetInt16, 'get_encoder_right', self.callback_get_encoder_right)
-        self.srv_get_encoders = self.create_service(GetEncoders, 'get_encoders', self.callback_get_encoders)
 
         # Subscriptions for Motor Setters
         self.sub_set_velocity_left = self.create_subscription(Int16, 'set_velocity_left', self.callback_set_velocity_left, 10)
@@ -51,7 +45,7 @@ class MicrocontrollerNode(Node):
 
         # Publishers
         self.pub_encoders = self.create_publisher(UInt16MultiArray, 'encoders', 10)
-        timer_period = 0.01  # seconds
+        timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def callback_get_velocity_left(self, request, response):
@@ -62,18 +56,6 @@ class MicrocontrollerNode(Node):
         response.data = self.mRight.get_velocity()
         return response
 
-    def callback_get_encoder_left(self, request, response):
-        response.data = self.mLeft.get_encoder()
-        return response
-
-    def callback_get_encoder_right(self, request, response):
-        response.data = self.mRight.get_encoder()
-        return response
-    
-    def callback_get_encoders(self, request, response):
-        response.uint16_encoder_values = self.multi.get_encoders()
-        return response
-    
     def callback_set_velocity_left(self, msg):
         self.mLeft.set_velocity(msg.data)
 
