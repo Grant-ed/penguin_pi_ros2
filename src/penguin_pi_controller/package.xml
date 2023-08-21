@@ -9,7 +9,7 @@
 
   <depend>std_msgs</depend>
   <depend>rclpy</depend>
-  <depend>penguin_pi_interfaces</depend>
+  <depend>penguin_pi_config</depend>
 
   <export>
     <build_type>ament_python</build_type>

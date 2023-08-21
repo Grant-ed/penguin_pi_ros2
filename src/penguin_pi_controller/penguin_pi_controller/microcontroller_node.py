@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16, UInt16MultiArray
-from penguin_pi_interfaces.srv import GetInt16
+from penguin_pi_config.srv import GetInt16
 
 # Importing the penguinPi library
 import penguin_pi_controller.penguin_pi_lib.penguinPi as ppi
