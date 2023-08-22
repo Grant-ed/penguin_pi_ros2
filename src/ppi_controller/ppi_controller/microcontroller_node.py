@@ -5,7 +5,7 @@ from std_msgs.msg import Int16, UInt16MultiArray
 from ppi_interfaces.srv import GetInt16
 
 # Importing the penguinPi library
-import penguin_pi_controller.penguin_pi_lib.penguinPi as ppi
+import ppi_controller.penguin_pi_lib.penguinPi as ppi
 
 class MicrocontrollerNode(Node):
     def __init__(self):

@@ -6,7 +6,7 @@ from os.path import join
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
-    config_share_path = get_package_share_directory("penguin_pi_config")
+    config_share_path = get_package_share_directory("ppi_config")
     default_model_path = join(
         config_share_path, "urdf", "penguin_pi.urdf"
     )

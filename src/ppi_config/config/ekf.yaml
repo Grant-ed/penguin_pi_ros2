@@ -30,14 +30,14 @@ ekf_filter_node:
         map_frame: map              # Defaults to "map" if unspecified
         odom_frame: odom            # Defaults to "odom" if unspecified
         base_link_frame: base_link  # Defaults to "base_link" ifunspecified
-        world_frame: odom           # Defaults to the value ofodom_frame if unspecified
+        world_frame: odom           # Defaults to the value of odom_frame if unspecified
 
-        odom0: demo/odom
-        odom0_config: [true,  true,  true,
-                       false, false, false,
-                       false, false, false,
-                       false, false, true,
-                       false, false, false]
+        odom0: /motor/twist
+        odom0_config: [false, false, false,      # x, y, z
+                       false, false, false,     # roll, pitch, yaw
+                       true,  false, false,     # x_vel, y_vel, z_vel
+                       false, false, true,      # roll_vel, pitch_vel, yaw_vel
+                       false, false, false]     # x_acc, y_acc, z_acc
 
         # imu0: demo/imu
         # imu0_config: [false, false, false,

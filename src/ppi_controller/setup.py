@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'penguin_pi_controller'
+package_name = 'ppi_controller'
 submodules = f'{package_name}/penguin_pi_lib'
 
 setup(
@@ -20,8 +20,8 @@ setup(
     license='TODO: License declaration',
     entry_points={
         'console_scripts': [
-            'microcontroller_node = penguin_pi_controller.microcontroller_node:main',
-            'stress_tester = penguin_pi_controller.stress_test_node:main'
+            'microcontroller_node = ppi_controller.microcontroller_node:main',
+            'stress_tester = ppi_controller.stress_test_node:main'
         ],
     },
 )
