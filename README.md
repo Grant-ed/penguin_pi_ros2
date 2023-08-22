@@ -13,5 +13,5 @@ Before running ros in a new terminal, or after rebuilding any packages, ALWAYS r
 source ~/.bashrc # Only need to run this command if using the same shell as used in the install script
 cd ~/penguin_pi_ros2/
 source install/setup.bash # or just `a` (no backticks)
-ros2 launch penguin_pi_ros2 display.launch.py
+ros2 launch ppi_config display.launch.py
 ```
