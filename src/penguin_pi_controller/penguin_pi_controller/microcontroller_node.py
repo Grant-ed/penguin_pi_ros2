@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16, UInt16MultiArray
-from penguin_pi_config.srv import GetInt16
+from ppi_interfaces.srv import GetInt16
 
 # Importing the penguinPi library
 import penguin_pi_controller.penguin_pi_lib.penguinPi as ppi
@@ -36,15 +36,15 @@ class MicrocontrollerNode(Node):
         self.mRight.get_all()
 
         # Services for Motor Getters
-        self.srv_get_velocity_left = self.create_service(GetInt16, 'get_velocity_left', self.callback_get_velocity_left)
-        self.srv_get_velocity_right = self.create_service(GetInt16, 'get_velocity_right', self.callback_get_velocity_right)
+        self.srv_get_velocity_left = self.create_service(GetInt16, '/motor/get_velocity_left', self.callback_get_velocity_left)
+        self.srv_get_velocity_right = self.create_service(GetInt16, '/motor/get_velocity_right', self.callback_get_velocity_right)
 
         # Subscriptions for Motor Setters
-        self.sub_set_velocity_left = self.create_subscription(Int16, 'set_velocity_left', self.callback_set_velocity_left, 10)
-        self.sub_set_velocity_right = self.create_subscription(Int16, 'set_velocity_right', self.callback_set_velocity_right, 10)
+        self.sub_set_velocity_left = self.create_subscription(Int16, '/motor/set_velocity_left', self.callback_set_velocity_left, 10)
+        self.sub_set_velocity_right = self.create_subscription(Int16, '/motor/set_velocity_right', self.callback_set_velocity_right, 10)
 
         # Publishers
-        self.pub_encoders = self.create_publisher(UInt16MultiArray, 'encoders', 10)
+        self.pub_encoders = self.create_publisher(UInt16MultiArray, '/motor/encoders', 10)
         timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 

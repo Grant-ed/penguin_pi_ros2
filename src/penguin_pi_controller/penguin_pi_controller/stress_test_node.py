@@ -3,7 +3,7 @@ from rclpy.node import Node
 import timeit
 
 from std_msgs.msg import String
-from penguin_pi_interfaces.srv import GetInt16, GetEncoders
+from ppi_interfaces.srv import GetInt16, GetEncoders
 
 class MinimalClientAsync(Node):
 

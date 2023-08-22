@@ -8,14 +8,6 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
-find_package(rosidl_default_generators REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/GetInt16.srv"
-  "srv/GetEncoders.srv"
-  DEPENDENCIES # Add packages that above messages depend on
-)
-
 install(
   DIRECTORY config rviz urdf launch
   DESTINATION share/${PROJECT_NAME}
