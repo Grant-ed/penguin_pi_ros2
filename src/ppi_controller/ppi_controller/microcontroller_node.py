@@ -3,7 +3,7 @@ from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16
 from ppi_interfaces.srv import GetInt16
-from geometry_msgs.msg import Encoders
+from ppi_interfaces.msg import Encoders
 
 # Importing the penguinPi library
 import ppi_controller.penguin_pi_lib.penguinPi as ppi
