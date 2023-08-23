@@ -32,8 +32,8 @@ ekf_filter_node:
         base_link_frame: base_link  # Defaults to "base_link" ifunspecified
         world_frame: odom           # Defaults to the value of odom_frame if unspecified
 
-        odom0: /motor/twist
-        odom0_config: [false, false, false,      # x, y, z
+        twist0: /motor/twist
+        twist0_config: [false, false, false,      # x, y, z
                        false, false, false,     # roll, pitch, yaw
                        true,  false, false,     # x_vel, y_vel, z_vel
                        false, false, true,      # roll_vel, pitch_vel, yaw_vel
