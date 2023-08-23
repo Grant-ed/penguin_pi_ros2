@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
-from std_msgs.msg import Int16, UInt16MultiArray
+from std_msgs.msg import Int16
 from ppi_interfaces.srv import GetInt16
+from geometry_msgs.msg import Encoders
 
 # Importing the penguinPi library
 import ppi_controller.penguin_pi_lib.penguinPi as ppi
@@ -44,7 +45,7 @@ class MicrocontrollerNode(Node):
         self.sub_set_velocity_right = self.create_subscription(Int16, '/motor/set_velocity_right', self.callback_set_velocity_right, 10)
 
         # Publishers
-        self.pub_encoders = self.create_publisher(UInt16MultiArray, '/motor/encoders', 10)
+        self.pub_encoders = self.create_publisher(Encoders, '/motor/encoders', 10)
         timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
@@ -64,9 +65,13 @@ class MicrocontrollerNode(Node):
 
     def timer_callback(self):
         # Publish encoder values
-        msg = UInt16MultiArray()
-        msg.data = self.multi.get_encoders()
-        self.get_logger().info(f'Publishing: {msg.data}')
+        msg = Encoders()
+        encoders = self.multi.get_encoders()
+        msg.left_encoder = encoders[0]
+        msg.right_encoder = encoders[1]
+        msg.header.stamp = self.get_clock().now().to_msg()
+        # self.get_logger().info(f'Publishing: {msg.data}')
+
         self.pub_encoders.publish(msg)
 
     def on_shutdown(self):
