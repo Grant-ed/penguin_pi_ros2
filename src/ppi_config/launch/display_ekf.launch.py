@@ -40,6 +40,13 @@ def generate_launch_description():
         output='screen',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
     )
+    microcontroller_node = launch_ros.actions.Node(
+        package='ppi_controller',
+        executable='microcontroller_node',
+        name='microcontroller_node',
+        output='screen',
+        parameters=[ekf_config_path]
+    )
     robot_localization_node = launch_ros.actions.Node(
         package='robot_localization',
         executable='ekf_node',
@@ -65,6 +72,7 @@ def generate_launch_description():
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
+        microcontroller_node,
         robot_localization_node,
         encoder_twist_translator_node,
         rviz_node
