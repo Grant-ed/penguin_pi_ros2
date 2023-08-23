@@ -27,8 +27,8 @@ class EncoderTranslator(Node):
         '''
         This function is called every time the encoder topic is updated.
         '''
-        new_left = msg.data[0]
-        new_right = msg.data[1]
+        new_left = msg.left_encoder
+        new_right = msg.right_encoder
         (sec, nanosec) = msg.header.stamp
         new_time = sec + nanosec * 1e-9
         
