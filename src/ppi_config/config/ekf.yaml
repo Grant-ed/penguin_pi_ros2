@@ -30,7 +30,7 @@ ekf_filter_node:
         # map_frame: map              # Defaults to "map" if unspecified
         odom_frame: odom            # Defaults to "odom" if unspecified
         base_link_frame: base_link  # Defaults to "base_link" ifunspecified
-        world_frame: odom           # Defaults to the value of odom_frame if unspecified
+        world_frame: odom_frame           # Defaults to the value of odom_frame if unspecified
 
         twist0: /motor/twist
         twist0_config: [false, false, false,      # x, y, z
