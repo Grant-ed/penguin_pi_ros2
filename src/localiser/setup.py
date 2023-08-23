@@ -19,6 +19,7 @@ setup(
     license='TODO: License declaration',
     entry_points={
         'console_scripts': [
+            'encoder_to_twist_node = localiser.encoder_to_twist_node:main',
         ],
     },
 )
