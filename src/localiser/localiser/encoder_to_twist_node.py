@@ -38,6 +38,7 @@ class EncoderTranslator(Node):
             self.initialised = True
             self.left_encoder = new_left
             self.right_encoder = new_right
+            self.prev_time = new_time
             return
         
         # function to calculate the difference between two encoder values (taking into account overflow)
