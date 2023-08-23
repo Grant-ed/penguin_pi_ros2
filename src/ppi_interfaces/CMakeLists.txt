@@ -11,6 +11,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Encoders.msg"
   "srv/GetInt16.srv"
   "srv/GetEncoders.srv"
   DEPENDENCIES # Add packages that above messages depend on
