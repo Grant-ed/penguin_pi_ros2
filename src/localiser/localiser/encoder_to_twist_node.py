@@ -3,7 +3,7 @@ import rclpy
 from rclpy.node import Node
 
 from ppi_interfaces.msg import Encoders
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import TwistWithCovariance
 
 
 class EncoderTranslator(Node):
@@ -19,7 +19,7 @@ class EncoderTranslator(Node):
         self.subscription  # prevent unused variable warning
 
         # Publishers
-        self.publisher = self.create_publisher(Twist, '/motor/twist', 10)
+        self.publisher = self.create_publisher(TwistWithCovariance, '/motor/twist', 10)
         self.initialised = False
     
     
@@ -66,10 +66,11 @@ class EncoderTranslator(Node):
         self.prev_time = new_time
 
         # publish the twist message
-        msg = Twist()
-        msg.linear.x = v
-        msg.angular.z = w
-        self.publisher.publish(msg)
+        twist_msg = TwistWithCovariance()
+        twist_msg.linear.x = v
+        twist_msg.angular.z = w
+        twist_msg.header.stamp = msg.header.stamp
+        self.publisher.publish(twist_msg)
 
 
 def main(args=None):
