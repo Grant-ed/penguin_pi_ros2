@@ -29,8 +29,7 @@ class EncoderTranslator(Node):
         '''
         new_left = msg.left_encoder
         new_right = msg.right_encoder
-        (sec, nanosec) = msg.header.stamp
-        new_time = sec + nanosec * 1e-9
+        new_time = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
         
         self.get_logger().info(f'Left: {new_left}, Right: {new_right}, Time: {new_time}')
 
