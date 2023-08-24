@@ -67,8 +67,8 @@ class EncoderTranslator(Node):
 
         # publish the twist message
         twist_msg = TwistWithCovarianceStamped()
-        twist_msg.twist.linear.x = v
-        twist_msg.twist.angular.z = w
+        twist_msg.twist.twist.linear.x = v
+        twist_msg.twist.twist.angular.z = w
         twist_msg.header.stamp = msg.header.stamp
         self.publisher.publish(twist_msg)
 
