@@ -12,35 +12,52 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(serial REQUIRED)
+# find_package(serial REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(Python REQUIRED Development)
+
+
+# add_library(diffdrive_arduino SHARED src/diffdrive_arduino.cpp src/wheel.cpp src/arduino_comms.cpp src/wheel.cpp)
+
+# target_include_directories(
+#   diffdrive_arduino
+#   PRIVATE
+#   include
+# )
+# ament_target_dependencies(
+#   diffdrive_arduino
+#   hardware_interface
+#   controller_manager
+#   serial
+#   rclcpp
+#   pluginlib
+# )
+
+# pluginlib_export_plugin_description_file(hardware_interface robot_hardware.xml)
 
 
 
-
-
-
-add_library(diffdrive_arduino SHARED src/diffdrive_arduino.cpp src/wheel.cpp src/arduino_comms.cpp src/wheel.cpp)
+add_library(diffdrive_penguinpi SHARED src/diffdrive_penguinpi.cpp src/wheel.cpp src/penguinpi_comms.cpp)
 
 target_include_directories(
-  diffdrive_arduino
+  diffdrive_penguinpi
   PRIVATE
   include
 )
 ament_target_dependencies(
-  diffdrive_arduino
+  diffdrive_penguinpi
   hardware_interface
   controller_manager
-  serial
   rclcpp
   pluginlib
-  python3.10
+  Python::Python
 )
 
-pluginlib_export_plugin_description_file(hardware_interface robot_hardware.xml)
+# target_link_libraries(diffdrive_penguinpi PRIVATE Python::Python)
+pluginlib_export_plugin_description_file(hardware_interface penguinpi_hardware.xml)
 
 
 
@@ -66,7 +83,7 @@ pluginlib_export_plugin_description_file(hardware_interface fake_robot_hardware.
 
 
 install(
-  TARGETS diffdrive_arduino fake_robot
+  TARGETS diffdrive_penguinpi fake_robot #diffdrive_arduino
   DESTINATION lib
 )
 
@@ -80,7 +97,8 @@ install(
 
 
 ament_export_libraries(
-  diffdrive_arduino
+  # diffdrive_arduino
+  diffdrive_penguinpi
   fake_robot
 )
 ament_export_dependencies(

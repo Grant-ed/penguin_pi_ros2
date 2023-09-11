@@ -1,0 +1,9 @@
+<library path="diffdrive_arduino">
+  <class name="diffdrive_arduino/DiffDrivePenguinPi"
+         type="DiffDrivePenguinPi"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware Interface for Differential Drive DiffDrivePenguinPi controller.
+    </description>
+  </class>
+</library>
