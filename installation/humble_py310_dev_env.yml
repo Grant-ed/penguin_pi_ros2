@@ -4,7 +4,7 @@ channels:
 dependencies:
   # ROS Base Env deps
   - python=3.10
-  # - ros-humble-desktop
+  - ros-humble-desktop
   - colcon-common-extensions
   # - ca-certificates
   # - openssl
