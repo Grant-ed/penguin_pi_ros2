@@ -14,5 +14,6 @@ ros-humble-xacro
 # ros-humble-ros2-control-test-assets
 
 ros-humble-ros2-contollers
+ros-humble-controller-manager
 ros-humble-diff-drive-controller
 ros-humble-libcamera
