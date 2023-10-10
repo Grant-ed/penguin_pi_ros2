@@ -12,6 +12,6 @@ ros-humble-xacro
 # ros-humble-generate-parameter-library
 # ros-humble-ros2-control-test-assets
 
-ros2-contollers
-diff-drive-controller
-libcamera
+ros-humble-ros2-contollers
+ros-humble-diff-drive-controller
+ros-humble-libcamera
