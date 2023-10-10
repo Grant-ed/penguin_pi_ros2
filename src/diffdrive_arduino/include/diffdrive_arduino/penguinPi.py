@@ -706,3 +706,10 @@ class Hat(object):
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s  %(message)s', level=logging.INFO)
+
+init()
+multi = Multi('AD_MULTI')
+multi.set_velocity([-5,10])
+time.sleep(5)
+multi.stop_all()
+close()
