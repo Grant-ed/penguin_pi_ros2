@@ -1,4 +1,5 @@
 # package requirements (alphabetical)
+ros-humble-desktop
 ros-humble-joint-state-publisher-gui
 ros-humble-robot-localization # for NAV2 robot localization
 ros-humble-xacro
