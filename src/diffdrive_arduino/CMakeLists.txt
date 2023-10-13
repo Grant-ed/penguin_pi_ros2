@@ -11,10 +11,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra)
 endif()
 
-set(Python3_ROOT_DIR "/home/pi/miniforge3/envs/penguinpi_env/")
-set(Python3_INCLUDE_DIR "/home/pi/miniforge3/envs/penguinpi_env/include/python3.10/")
-set(Python3_LIBRARY "/home/pi/miniforge3/envs/penguinpi_env/lib/libpython3.10.so")
-
 find_package(ament_cmake REQUIRED)
 # find_package(serial REQUIRED)
 find_package(hardware_interface REQUIRED)
@@ -22,7 +18,6 @@ find_package(controller_manager REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter Development)
-
 
 # add_library(diffdrive_arduino SHARED src/diffdrive_arduino.cpp src/wheel.cpp src/arduino_comms.cpp src/wheel.cpp)
 
@@ -50,7 +45,7 @@ target_include_directories(
   diffdrive_penguinpi
   PRIVATE
   include
-  ${Python3_INCLUDE_DIRS}  # Add Python include directories here
+  # ${Python3_INCLUDE_DIRS}
 )
 
 ament_target_dependencies(
@@ -59,37 +54,36 @@ ament_target_dependencies(
   controller_manager
   rclcpp
   pluginlib
+  Python3
 )
-
-target_link_libraries(diffdrive_penguinpi PRIVATE Python3::Python)  # Link against Python3 library here
 
 pluginlib_export_plugin_description_file(hardware_interface penguinpi_hardware.xml)
 
 
 
-add_library(fake_robot SHARED src/fake_robot.cpp src/wheel.cpp)
-set_property(TARGET fake_robot PROPERTY POSITION_INDEPENDENT_CODE ON)
+# add_library(fake_robot SHARED src/fake_robot.cpp src/wheel.cpp)
+# set_property(TARGET fake_robot PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-target_include_directories(
-  fake_robot
-  PRIVATE
-  include
-)
-ament_target_dependencies(
-  fake_robot
-  hardware_interface
-  controller_manager
-  rclcpp
-  pluginlib
-)
+# target_include_directories(
+#   fake_robot
+#   PRIVATE
+#   include
+# )
+# ament_target_dependencies(
+#   fake_robot
+#   hardware_interface
+#   controller_manager
+#   rclcpp
+#   pluginlib
+# )
 
-pluginlib_export_plugin_description_file(hardware_interface fake_robot_hardware.xml)
+# pluginlib_export_plugin_description_file(hardware_interface fake_robot_hardware.xml)
 
 
 
 
 install(
-  TARGETS diffdrive_penguinpi fake_robot #diffdrive_arduino
+  TARGETS diffdrive_penguinpi #fake_robot #diffdrive_arduino
   DESTINATION lib
 )
 
@@ -105,7 +99,7 @@ install(
 ament_export_libraries(
   # diffdrive_arduino
   diffdrive_penguinpi
-  fake_robot
+  # fake_robot
 )
 ament_export_dependencies(
   hardware_interface
@@ -113,6 +107,7 @@ ament_export_dependencies(
   serial
   rclcpp
   pluginlib
+  Python3
 )
 
 ament_package()

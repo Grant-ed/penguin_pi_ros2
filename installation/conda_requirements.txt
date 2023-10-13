@@ -16,4 +16,5 @@ ros-humble-xacro
 ros-humble-ros2-contollers
 ros-humble-controller-manager
 ros-humble-diff-drive-controller
+ros-humble-hardware-interface
 ros-humble-libcamera
