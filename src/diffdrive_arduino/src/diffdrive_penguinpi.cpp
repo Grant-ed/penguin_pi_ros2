@@ -1,4 +1,4 @@
-#include "diffdrive_arduino/diffdrive_arduino.h"
+#include "diffdrive_arduino/diffdrive_penguinpi.h"
 
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
@@ -6,15 +6,15 @@
 
 
 
-DiffDriveArduino::DiffDriveArduino()
-    : logger_(rclcpp::get_logger("DiffDriveArduino"))
+DiffDrivePenguinPi::DiffDrivePenguinPi()
+    : logger_(rclcpp::get_logger("DiffDrivePenguinPi"))
 {}
 
 
 
 
 
-return_type DiffDriveArduino::configure(const hardware_interface::HardwareInfo & info)
+return_type DiffDrivePenguinPi::configure(const hardware_interface::HardwareInfo & info)
 {
   if (configure_default(info) != return_type::OK) {
     return return_type::ERROR;
@@ -45,7 +45,7 @@ return_type DiffDriveArduino::configure(const hardware_interface::HardwareInfo &
   return return_type::OK;
 }
 
-std::vector<hardware_interface::StateInterface> DiffDriveArduino::export_state_interfaces()
+std::vector<hardware_interface::StateInterface> DiffDrivePenguinPi::export_state_interfaces()
 {
   // We need to set up a position and a velocity interface for each wheel
 
@@ -59,7 +59,7 @@ std::vector<hardware_interface::StateInterface> DiffDriveArduino::export_state_i
   return state_interfaces;
 }
 
-std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_command_interfaces()
+std::vector<hardware_interface::CommandInterface> DiffDrivePenguinPi::export_command_interfaces()
 {
   // We need to set up a velocity command interface for each wheel
 
@@ -72,7 +72,7 @@ std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_comma
 }
 
 
-return_type DiffDriveArduino::start()
+return_type DiffDrivePenguinPi::start()
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
 
@@ -86,7 +86,7 @@ return_type DiffDriveArduino::start()
   return return_type::OK;
 }
 
-return_type DiffDriveArduino::stop()
+return_type DiffDrivePenguinPi::stop()
 {
   RCLCPP_INFO(logger_, "Stopping Controller...");
   status_ = hardware_interface::status::STOPPED;
@@ -94,7 +94,7 @@ return_type DiffDriveArduino::stop()
   return return_type::OK;
 }
 
-hardware_interface::return_type DiffDriveArduino::read()
+hardware_interface::return_type DiffDrivePenguinPi::read()
 {
 
   // TODO fix chrono duration
@@ -128,7 +128,7 @@ hardware_interface::return_type DiffDriveArduino::read()
   
 }
 
-hardware_interface::return_type DiffDriveArduino::write()
+hardware_interface::return_type DiffDrivePenguinPi::write()
 {
 
   if (!arduino_.connected())
@@ -152,6 +152,6 @@ hardware_interface::return_type DiffDriveArduino::write()
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  DiffDriveArduino,
+  DiffDrivePenguinPi,
   hardware_interface::SystemInterface
 )
