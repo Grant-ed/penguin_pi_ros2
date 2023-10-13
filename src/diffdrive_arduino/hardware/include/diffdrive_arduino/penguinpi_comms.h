@@ -11,6 +11,7 @@ public:
 
     void init();
     void close();
+    bool connected();
     void set_velocity(int8_t left, int8_t right);
     uint16_t* get_encoders();
     uint16_t* set_velocity_get_encoders(int8_t left, int8_t right);
@@ -20,6 +21,7 @@ public:
 private:
     PyObject *pModule;
     PyObject *pInstance;
+    bool initialised;
 };
 
 #endif // DIFFDRIVE_ARDUINO_PENGUINPI_COMMS_H

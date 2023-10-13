@@ -94,6 +94,12 @@ class UART(object):
         self.ser.close()
         self.ser.__del__()
 
+    def is_open(self):
+        '''Check if the comunication between the raspberry pi and the
+        microcontroler is open
+        '''
+        return self.ser.isOpen() and self.receive_thread.is_alive()
+
     def flush(self):
         '''flushes input and output buffer, clears queue
         '''
@@ -180,6 +186,10 @@ def close():
     uart.stop()
     logging.info("UART stopped and closed")
 
+def connected():
+    '''Check if the UART object is connected
+    '''
+    return uart.is_open()
 
 def crc8(word, length):
     '''cyclic redundancy check

@@ -31,7 +31,7 @@
 #include "rclcpp_lifecycle/state.hpp"
 #include "diffdrive_arduino/visibility_control.h"
 
-#include "diffdrive_arduino/penguinpi_comms.hpp"
+#include "diffdrive_arduino/penguinpi_comms.h"
 #include "diffdrive_arduino/wheel.hpp"
 
 namespace diffdrive_arduino
@@ -44,9 +44,9 @@ struct Config
   std::string left_wheel_name = "";
   std::string right_wheel_name = "";
   float loop_rate = 0.0;
-  std::string device = "";
-  int baud_rate = 0;
-  int timeout_ms = 0;
+  // std::string device = "";
+  // int baud_rate = 0;
+  // int timeout_ms = 0;
   int enc_counts_per_rev = 0;
   int pid_p = 0;
   int pid_d = 0;
