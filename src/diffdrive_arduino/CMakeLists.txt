@@ -19,6 +19,8 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
 
+# need custom find_package for python3
+find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter Development)
 
 ## COMPILE
 add_library(
@@ -34,9 +36,10 @@ $<INSTALL_INTERFACE:include/diffdrive_arduino>
 ament_target_dependencies(
   diffdrive_arduino PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
+  Python3
 )
 
-target_link_libraries(diffdrive_arduino PUBLIC serial)
+# target_link_libraries(diffdrive_arduino PUBLIC serial)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.

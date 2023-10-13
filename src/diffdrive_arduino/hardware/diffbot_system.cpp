@@ -233,7 +233,7 @@ hardware_interface::return_type diffdrive_arduino ::DiffDriveArduinoHardware::wr
 
   int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
   int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-  uint16_t * encoders = comms_.set_velocity_get_encoders(motor_l_counts_per_loop, motor_r_counts_per_loop);
+  comms_.set_velocity_get_encoders(motor_l_counts_per_loop, motor_r_counts_per_loop);
   // wheel_l_.enc = encoders[0];
   // wheel_r_.enc = encoders[1];
   return hardware_interface::return_type::OK;
