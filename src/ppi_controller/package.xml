@@ -10,6 +10,7 @@
   <depend>std_msgs</depend>
   <depend>rclpy</depend>
   <depend>ppi_config</depend>
+  <depend>ppi_interfaces</depend>
 
   <export>
     <build_type>ament_python</build_type>
