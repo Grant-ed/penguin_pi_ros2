@@ -30,7 +30,7 @@ DGRAM_MAX_LENGTH = 10 #bytes
 CRC_8_POLY = 0x97
 
 debug_comms = False
-debug_comms = True
+# debug_comms = True
 
 
 symbols = os.path.join(os.path.dirname(__file__), 'atmel-symbols.pickle')
@@ -213,6 +213,8 @@ def crc8(word, length):
                 crc = (crc >> 1) ^ CRC_8_POLY
             else:
                 crc =  (crc >> 1)
+    if debug_comms:
+        print("CRC8: ", datagram2str(word), " Length: ", length, " CRC: ", hex(crc))
     return crc
 
 
