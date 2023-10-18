@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from std_msgs.msg import Int16
+from geometry_msgs.msg import Twist
 from ppi_interfaces.srv import GetInt16
 from ppi_interfaces.msg import Encoders
 
@@ -36,32 +37,27 @@ class MicrocontrollerNode(Node):
         self.mLeft.get_all()
         self.mRight.get_all()
 
-        # Services for Motor Getters
-        self.srv_get_velocity_left = self.create_service(GetInt16, '/motor/get_velocity_left', self.callback_get_velocity_left)
-        self.srv_get_velocity_right = self.create_service(GetInt16, '/motor/get_velocity_right', self.callback_get_velocity_right)
-
         # Subscriptions for Motor Setters
         self.sub_set_velocity_left = self.create_subscription(Int16, '/motor/set_velocity_left', self.callback_set_velocity_left, 10)
         self.sub_set_velocity_right = self.create_subscription(Int16, '/motor/set_velocity_right', self.callback_set_velocity_right, 10)
+        # self.sub_cmd_vel = self.create_subscription(Twist, '/cmd_vel', self.callback_cmd_vel, 10)
 
         # Publishers
         self.pub_encoders = self.create_publisher(Encoders, '/motor/encoders', 10)
-        timer_period = 0.005  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-
-    def callback_get_velocity_left(self, request, response):
-        response.data = self.mLeft.get_velocity()
-        return response
-
-    def callback_get_velocity_right(self, request, response):
-        response.data = self.mRight.get_velocity()
-        return response
+        # timer_period = 0.005  # seconds
+        # self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def callback_set_velocity_left(self, msg):
         self.mLeft.set_velocity(msg.data)
 
     def callback_set_velocity_right(self, msg):
-        self.mRight.set_velocity(msg.data)
+        # self.mRight.set_velocity(msg.data)
+        self.multi.set_velocity([msg.data, msg.data])
+        # encoders = self.multi.get_encoders()
+        # print("Encoders: " + encoders)
+
+    # def callback_cmd_vel(self, msg):
+
 
     def timer_callback(self):
         # Publish encoder values

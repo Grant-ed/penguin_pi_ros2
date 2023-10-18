@@ -105,7 +105,25 @@ class UART(object):
         '''
         dgram = (struct.pack('!B', STARTBYTE)) + dgram
         self.ser.write(dgram)
-        #print(str(datetime.datetime.now())+": DGRAM: ad=0x%02x op=0x%02x" % (dgram[2], dgram[3]) )    ;
+        
+        if debug_comms:
+            print("SEND: " + datagram2str(dgram))
+        # print(str(datetime.datetime.now())+": DGRAM: b0=0x%02x b1=0x%02x ad=0x%02x op=0x%02x" % (dgram[0], dgram[1], dgram[2], dgram[3]) )
+        # print(str(datetime.datetime.now())+f": DGRAM: 0x {dgram}"  )
+        # message = "DGRAM: 0x "
+        # for i in range(len(dgram)):
+        #     message += f"{dgram[i]:02x} "
+        # print(message)
+        # message = "DGRAM_INT:"
+        # for i in range(len(dgram)):
+        #     message += f"{dgram[i]:d} "
+        # print(message)
+        # message = "DGRAM_CHAR:"
+        # for i in range(len(dgram)):
+        #     message += f"{chr(dgram[i])} "
+        # print(message)
+        # print()
+
     def puts(self, s):
         self.ser.write(s.encode('utf-8'))
 
@@ -146,6 +164,9 @@ class UART(object):
                         # bad CRC, print some diagnostics
                         logging.error("CRC Failed ", hex(crcCalc), " received ", hex(crcDgram), datagram2str(dgram));
                         self.queue.put(None)
+                    if debug_comms:
+                        print("RECV: " + datagram2str((struct.pack('!B', STARTBYTE)) + dgram))
+                        print()
                 else: 
                     # text from the Atmel, perhaps an error message
                     if ord(byte) == 0x0a:
@@ -269,10 +290,6 @@ def send_datagram(address, opCode, payload=None, paytype='', rxtype=''):
     dgram = (struct.pack("!B", length)) + dgram
     crc = crc8(dgram, length-1)
     dgram = dgram + (struct.pack("!B", crc))
-
-    if debug_comms:
-        logging.debug(datagram2str(dgram))
-
 
     with comms_mutex:
         # the following code can be executed by only one thread at a time
@@ -706,3 +723,10 @@ class Hat(object):
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s  %(message)s', level=logging.INFO)
+
+# init()
+# multi = Multi('AD_MULTI')
+# multi.set_velocity([-5,10])
+# time.sleep(5)
+# multi.stop_all()
+# close()
