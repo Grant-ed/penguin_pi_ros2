@@ -18,4 +18,5 @@ ros-humble-ros2-controllers
 ros-humble-controller-manager
 ros-humble-diff-drive-controller
 ros-humble-hardware-interface
+ros-humble-joint-state-broadcaster
 # ros-humble-libcamera
