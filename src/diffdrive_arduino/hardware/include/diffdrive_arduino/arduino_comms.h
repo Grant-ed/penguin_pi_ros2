@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
-#define DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
+#ifndef DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_
+#define DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_
 
 #include <libserial/SerialPort.h>
 #include <iostream>
@@ -157,4 +157,4 @@ private:
   bool validate_payload(LibSerial::DataBuffer &payload, Address address, OpCode opCode);
 };
 
-#endif // DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
+#endif // DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_

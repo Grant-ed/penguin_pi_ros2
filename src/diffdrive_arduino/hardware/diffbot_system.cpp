@@ -35,7 +35,6 @@ hardware_interface::CallbackReturn DiffDriveArduinoHardware::on_init(
     return hardware_interface::CallbackReturn::ERROR;
   }
 
-
   cfg_.left_wheel_name = (info_.hardware_parameters["left_wheel_name"]);
   cfg_.right_wheel_name = (info_.hardware_parameters["right_wheel_name"]);
   cfg_.loop_hz = std::stof(info_.hardware_parameters["loop_hz"]);

@@ -1,4 +1,4 @@
-#include "ros2_control_demo_example_2/arduino_comms.h"
+#include "diffdrive_arduino/arduino_comms.h"
 
 LibSerial::BaudRate convert_baud_rate(int baud_rate)
 {

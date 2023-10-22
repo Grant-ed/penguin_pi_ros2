@@ -5,7 +5,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
   add_compile_options(-Wall -Wextra)
 endif()
 
-set(LIBSERIAL_DIR /home/grant/libserial/src/)
+set(LIBSERIAL_DIR ~/libserial/src/)
 
 # find dependencies
 set(THIS_PACKAGE_INCLUDE_DEPENDS
@@ -33,6 +33,7 @@ add_library(
   diffdrive_arduino
   SHARED
   hardware/diffbot_system.cpp
+  hardware/arduino_comms.cpp
   ${SOURCES}
 )
 target_compile_features(diffdrive_arduino PUBLIC cxx_std_17)
