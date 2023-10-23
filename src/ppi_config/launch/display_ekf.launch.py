@@ -47,13 +47,6 @@ def generate_launch_description():
         output='screen',
         parameters=[ekf_config_path]
     )
-    encoder_twist_translator_node = launch_ros.actions.Node(
-        package='localiser',
-        executable='encoder_to_twist_node',
-        name='encoder_to_twist_node',
-        output='screen',
-        parameters=[ekf_config_path]
-    )
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
@@ -64,6 +57,5 @@ def generate_launch_description():
         robot_state_publisher_node,
         microcontroller_node,
         robot_localization_node,
-        encoder_twist_translator_node,
         rviz_node
     ])
