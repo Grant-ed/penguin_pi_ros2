@@ -77,11 +77,27 @@ def generate_launch_description():
         )
     )
 
+    cam2image_node = Node(
+        package="image_tools",
+        executable="cam2image",
+        parameters=[{"frequency": 10.0}],
+        output="both"
+    )
+
+    image_flipper_node = Node(
+        package="image_flipper",
+        executable="image_flipper",
+        output="both"
+    )
+
+
     nodes = [
         control_node,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
+        cam2image_node,
+        image_flipper_node,
     ]
 
     return LaunchDescription(nodes)
