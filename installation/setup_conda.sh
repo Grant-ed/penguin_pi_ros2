@@ -21,6 +21,13 @@ echo ""
 sleep 3
 git clone --recurse-submodules https://github.com/Grant-ed/penguin_pi_ros2.git
 
+## Clone libserial repo
+echo ""
+echo "---Cloning LibSerial repo---"
+echo ""
+sleep 3
+git clone https://github.com/crayzeewulf/libserial.git
+
 ## Download and install mambaforge
 source ~/penguin_pi_ros2/installation/install_scripts/install_mambaforge.sh
 
@@ -34,6 +41,7 @@ echo ""
 echo "---Building packages---"
 echo ""
 sleep 3
+cd ~/penguin_pi_ros2
 colcon build --symlink-install
 source ~/.bashrc
 a
