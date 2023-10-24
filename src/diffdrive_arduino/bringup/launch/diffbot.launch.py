@@ -81,7 +81,8 @@ def generate_launch_description():
         package="image_tools",
         executable="cam2image",
         parameters=[{"frequency": 10.0}],
-        output="both"
+        output="both",
+        arguments=['--ros-args', '--log-level', 'WARN'] # suppress INFO messages
     )
 
     image_flipper_node = Node(
