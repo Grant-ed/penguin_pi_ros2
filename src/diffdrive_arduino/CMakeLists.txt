@@ -61,7 +61,7 @@ install(
   DESTINATION include/diffdrive_arduino
 )
 install(
-  DIRECTORY description/launch description/ros2_control description/urdf description/rviz
+  DIRECTORY description/launch description/ros2_control description/urdf description/rviz description/meshes
   DESTINATION share/diffdrive_arduino
 )
 install(

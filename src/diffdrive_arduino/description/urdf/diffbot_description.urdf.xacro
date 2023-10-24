@@ -45,7 +45,7 @@
       <visual>
         <origin xyz="0 0 ${(wheel_zoff+wheel_radius)}" rpy="0 0 0"/>
         <geometry>
-          <box size="${base_length} ${base_width} ${base_height}"/>
+          <mesh filename="file://$(find diffdrive_arduino)/meshes/Penguin_Pi_Model.STL" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="Cyan">
           <color rgba="0 1.0 1.0 1.0"/>
@@ -54,7 +54,7 @@
 
       <collision>
         <geometry>
-          <box size="${base_length} ${base_width} ${base_height}"/>
+          <mesh filename="file://$(find diffdrive_arduino)/meshes/Penguin_Pi_Model.STL" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
 
