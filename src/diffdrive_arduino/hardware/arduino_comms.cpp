@@ -106,8 +106,8 @@ void ArduinoComms::read_encoders(uint16_t &left_encoder, uint16_t &right_encoder
 void ArduinoComms::set_motor_vel(int8_t left_motor, int8_t right_motor)
 {
   LibSerial::DataBuffer data_to_send;
-  data_to_send.push_back(left_motor);
   data_to_send.push_back(right_motor);
+  data_to_send.push_back(left_motor);
   send_datagram(AD_MULTI, MULTI_SET_VEL, data_to_send);
 }
 
