@@ -137,6 +137,7 @@ hardware_interface::CallbackReturn DiffDriveArduinoHardware::on_activate(
     comms_.disconnect();
   }
   comms_.connect(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
+  comms_.clear_data();
   RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Successfully activated!");
 
   return hardware_interface::CallbackReturn::SUCCESS;
