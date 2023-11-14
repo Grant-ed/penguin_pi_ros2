@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_
-#define DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_
+#ifndef DIFFDRIVE_PENGUINPI_PENGUINPI_COMMS_H_
+#define DIFFDRIVE_PENGUINPI_PENGUINPI_COMMS_H_
 
 #include <libserial/SerialPort.h>
 #include <iostream>
@@ -64,19 +64,19 @@ std::string databuffer_to_string(const LibSerial::DataBuffer &data);
 /**
  * @brief Class for communicating with the PenguinPi HAT
  */
-class ArduinoComms
+class PenguinPiComms
 {
 
 public:
   /**
    * @brief Constructor
    */
-  ArduinoComms();
+  PenguinPiComms();
 
   /**
    * @brief Destructor
    */
-  ~ArduinoComms();
+  ~PenguinPiComms();
 
   /**
    * @brief Connect to the serial port
@@ -157,4 +157,4 @@ private:
   bool validate_payload(LibSerial::DataBuffer &payload, Address address, OpCode opCode);
 };
 
-#endif // DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H_
+#endif // DIFFDRIVE_PENGUINPI_PENGUINPI_COMMS_H_

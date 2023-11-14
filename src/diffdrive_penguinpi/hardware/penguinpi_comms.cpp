@@ -1,4 +1,4 @@
-#include "diffdrive_arduino/arduino_comms.h"
+#include "diffdrive_penguinpi/penguinpi_comms.h"
 
 LibSerial::BaudRate convert_baud_rate(int baud_rate)
 {
@@ -47,9 +47,9 @@ std::string databuffer_to_string(const LibSerial::DataBuffer &data)
   return s;
 }
 
-ArduinoComms::ArduinoComms() = default;
+PenguinPiComms::PenguinPiComms() = default;
 
-ArduinoComms::~ArduinoComms()
+PenguinPiComms::~PenguinPiComms()
 {
   if (connected())
   {
@@ -57,7 +57,7 @@ ArduinoComms::~ArduinoComms()
   }
 }
 
-void ArduinoComms::connect(const std::string &serial_device, int32_t baud_rate, int32_t timeout_ms)
+void PenguinPiComms::connect(const std::string &serial_device, int32_t baud_rate, int32_t timeout_ms)
 {
   if (connected())
   {
@@ -83,17 +83,17 @@ void ArduinoComms::connect(const std::string &serial_device, int32_t baud_rate, 
   serial_conn_.SetStopBits(LibSerial::StopBits::STOP_BITS_1);
 }
 
-void ArduinoComms::disconnect()
+void PenguinPiComms::disconnect()
 {
   serial_conn_.Close();
 }
 
-bool ArduinoComms::connected() const
+bool PenguinPiComms::connected() const
 {
   return serial_conn_.IsOpen();
 }
 
-void ArduinoComms::read_encoders(uint16_t &left_encoder, uint16_t &right_encoder)
+void PenguinPiComms::read_encoders(uint16_t &left_encoder, uint16_t &right_encoder)
 {
   LibSerial::DataBuffer empty;
   LibSerial::DataBuffer response = send_datagram(AD_MULTI, MULTI_GET_ENC, empty);
@@ -103,7 +103,7 @@ void ArduinoComms::read_encoders(uint16_t &left_encoder, uint16_t &right_encoder
   right_encoder = (response[2] << 8) | response[3];
 }
 
-void ArduinoComms::set_motor_vel(int8_t left_motor, int8_t right_motor)
+void PenguinPiComms::set_motor_vel(int8_t left_motor, int8_t right_motor)
 {
   LibSerial::DataBuffer data_to_send;
   data_to_send.push_back(right_motor);
@@ -111,13 +111,13 @@ void ArduinoComms::set_motor_vel(int8_t left_motor, int8_t right_motor)
   send_datagram(AD_MULTI, MULTI_SET_VEL, data_to_send);
 }
 
-void ArduinoComms::clear_data()
+void PenguinPiComms::clear_data()
 {
   LibSerial::DataBuffer empty;
   send_datagram(AD_MULTI, MULTI_CLEAR_DATA, empty);
 }
 
-LibSerial::DataBuffer ArduinoComms::send_datagram(Address address, OpCode opCode, LibSerial::DataBuffer &data)
+LibSerial::DataBuffer PenguinPiComms::send_datagram(Address address, OpCode opCode, LibSerial::DataBuffer &data)
 {
   // data to send starts with address, opCode, then data
   LibSerial::DataBuffer data_to_send = {static_cast<uint8_t>(address), static_cast<uint8_t>(opCode)};
@@ -143,7 +143,7 @@ LibSerial::DataBuffer ArduinoComms::send_datagram(Address address, OpCode opCode
   return LibSerial::DataBuffer(response.begin() + 3, response.end());
 }
 
-uint8_t ArduinoComms::crc8(const LibSerial::DataBuffer &data)
+uint8_t PenguinPiComms::crc8(const LibSerial::DataBuffer &data)
 {
   uint8_t crc = 0;
   for (auto it = data.begin(); it != data.end(); ++it)
@@ -164,7 +164,7 @@ uint8_t ArduinoComms::crc8(const LibSerial::DataBuffer &data)
   return crc;
 }
 
-void ArduinoComms::send_bytes(const LibSerial::DataBuffer &data_to_send)
+void PenguinPiComms::send_bytes(const LibSerial::DataBuffer &data_to_send)
 {
   serial_conn_.FlushIOBuffers(); // Just in case
 
@@ -181,7 +181,7 @@ void ArduinoComms::send_bytes(const LibSerial::DataBuffer &data_to_send)
 #endif
 }
 
-LibSerial::DataBuffer ArduinoComms::recieve_bytes()
+LibSerial::DataBuffer PenguinPiComms::recieve_bytes()
 {
   LibSerial::DataBuffer response;
   serial_conn_.Read(response, 1, timeout_ms_);
@@ -251,7 +251,7 @@ LibSerial::DataBuffer ArduinoComms::recieve_bytes()
   return dgram;
 }
 
-bool ArduinoComms::validate_payload(LibSerial::DataBuffer &payload, Address address, OpCode opCode)
+bool PenguinPiComms::validate_payload(LibSerial::DataBuffer &payload, Address address, OpCode opCode)
 {
   // check size
   if (payload.size() == 0)

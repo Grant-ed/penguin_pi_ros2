@@ -1,6 +1,6 @@
-# diffdrive_arduino
+# diffdrive_penguinpi
 
-This node is designed to provide a ros2_control hardware interface for an Arduino running firmware from `ros_arduino_bridge`.
+This node is designed to provide a ros2_control hardware interface for the PenguinPi Atmega microcontroller running firmware adapted from `ros_arduino_bridge`.
 It is designed to be used with a `diff_drive_controller` from `ros2_control`.
 It is expected to communicate via serial and to have two motors, each with velocity control and position/velocity feedback.
 

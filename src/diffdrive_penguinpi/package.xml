@@ -1,15 +1,13 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>diffdrive_arduino</name>
+  <name>diffdrive_penguinpi</name>
   <version>0.0.0</version>
-  <description>Demo package of `ros2_control` hardware for DiffBot.</description>
+  <description>PenguinPi hardware control package, adapted from demo package of `ros2_control` hardware for DiffBot.</description>
 
-  <maintainer email="denis.stogl@stoglrobotics.de">Dr.-Ing. Denis Štogl</maintainer>
-  <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
-  <maintainer email="christoph.froehlich@ait.ac.at">Christoph Froehlich</maintainer>
+  <maintainer email="grantvanbreda@gmail.com">Grant van Breda</maintainer>
 
-  <author email="denis.stogl@stoglrobotics.de">Dr.-Ing. Denis Štogl</author>
+  <author email="grantvanbreda@gmail.com">Grant van Breda</author>
 
   <license>Apache-2.0</license>
 

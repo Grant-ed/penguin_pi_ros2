@@ -38,7 +38,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare("diffdrive_arduino"), "urdf", "diffbot.urdf.xacro"]
+                [FindPackageShare("diffdrive_penguinpi"), "urdf", "diffbot.urdf.xacro"]
             ),
         ]
     )
@@ -46,13 +46,13 @@ def generate_launch_description():
 
     robot_controllers = PathJoinSubstitution(
         [
-            FindPackageShare("diffdrive_arduino"),
+            FindPackageShare("diffdrive_penguinpi"),
             "config",
             "diffbot_controllers.yaml",
         ]
     )
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("diffdrive_arduino"), "rviz", "diffbot.rviz"]
+        [FindPackageShare("diffdrive_penguinpi"), "rviz", "diffbot.rviz"]
     )
 
     control_node = Node(
@@ -96,7 +96,8 @@ def generate_launch_description():
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
             on_exit=[rviz_node],
-        )
+        ),
+        condition=IfCondition(launch_rviz)
     )
 
     # Delay start of robot_controller after `joint_state_broadcaster`
