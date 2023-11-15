@@ -43,7 +43,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/di
 
 <a id="networking"></a>
 ## Networking
-If you need
+This section is useful information for using ROS2 across multiple devices (e.g. in order to use visualisation tools).
 
 ### Setting the `ROS_DOMAIN_ID`
 For ROS 2 networking, set `ROS_DOMAIN_ID` to ensure nodes communicate only within the same domain. Choose any integer between 0 and 255.
