@@ -13,10 +13,15 @@ This script will install the mamba environment, clone / build the required repos
 ## Running Instructions
 Before running ROS2 in a new terminal session, or after rebuilding any packages, always re-source your environment. Use `source install/setup.bash` or simply `a`, which is the alias set during installation. To verify that everything is installed correctly, open a new terminal, source your environment, and run:
 ```sh
-source ~/.bashrc # Only necessary if using the same shell as the installation script
-cd ~/penguin_pi_ros2/
+cd ~/penguin_pi_ros2
 mamba activate penguinpi_env
-source install/setup.bash # or use the alias `a`
+source install/setup.bash
+ros2 launch diffdrive_penguinpi diffbot.launch.py
+```
+Alternatively, using the bash alias `a` which was set up in the install script:
+```
+cd ~/penguin_pi_ros2
+a
 ros2 launch diffdrive_penguinpi diffbot.launch.py
 ```
 To launch RVIZ on the robot at the same time (not typically recommended due to high resource usage), use the following command:
