@@ -109,7 +109,7 @@ LibSerial::BaudRate convert_baud_rate(int baud_rate);
 std::string databuffer_to_string(const LibSerial::DataBuffer &data);
 
 /**
- * @brief Class for communicating with the PenguinPi HAT
+ * @brief Class for communicating with the PenguinPi Atmega Microcontroller
  */
 class PenguinPiComms
 {
@@ -145,7 +145,7 @@ public:
   bool connected() const;
 
   /**
-   * @brief Get the encoder values from the HAT
+   * @brief Get the encoder values from the Microcontroller
    * @param left_encoder left encoder value
    * @param right_encoder right encoder value
    */
@@ -164,11 +164,11 @@ public:
   void clear_data();
 
   /**
-   * @brief Send a datagram to the HAT and wait for a response
-   * @param address address of the HAT object
+   * @brief Send a datagram to the Microcontroller and wait for a response
+   * @param address address of the Microcontroller object
    * @param opCode opCode of the message
-   * @param data DataBuffer to send to HAT
-   * @return Response from HAT. Empty if no response expected, or if response is invalid.
+   * @param data DataBuffer to send to Microcontroller
+   * @return Response from Microcontroller. Empty if no response expected, or if response is invalid.
    */
   LibSerial::DataBuffer send_datagram(Address address, OpCode opCode, LibSerial::DataBuffer &data);
 
@@ -177,27 +177,27 @@ private:
   int timeout_ms_;
 
   /**
-   * @brief cyclic redundancy check
+   * @brief cyclic redundancy check for message validity
    * @param data DataBuffer to calculate crc8 on
    * @return crc8 value
    */
   uint8_t crc8(const LibSerial::DataBuffer &data);
 
   /**
-   * @brief Send a message to the HAT
-   * @param data_to_send DataBuffer to send to HAT
+   * @brief Send a message to the Microcontroller
+   * @param data_to_send DataBuffer to send to Microcontroller
    */
   void send_bytes(const LibSerial::DataBuffer &data_to_send);
 
   /**
-   * @brief Recieve a message from the HAT
-   * @return response from HAT
+   * @brief Recieve a message from the Microcontroller
+   * @return response from Microcontroller
    */
   LibSerial::DataBuffer recieve_bytes();
 
   /**
-   * @brief Validate a payload from the HAT
-   * @param address address of the HAT object
+   * @brief Validate a payload from the Microcontroller
+   * @param address address of the Microcontroller object
    * @param opCode opCode of the message
    * @return true if payload is valid, false otherwise
    */
