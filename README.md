@@ -66,3 +66,28 @@ set ROS_DOMAIN_ID=10
 For permanent setup, add it to System Environment Variables.
 
 This setting is required on all machines in the network for proper communication, and if it has to be run in each terminal if not set up permanently.
+
+## Limitations
+
+This section outlines the current limitations of the PenguinPi ROS2 environment and possible directions for future development. It's intended to guide future developers in understanding and potentially resolving these constraints.
+
+### Exclusive Access to Serial Port by ROS2 Control
+
+- **Issue:** Currently, the serial port used for communication with the microcontroller can only support a single connection. The `ros2_control` initializes the instance of `penguinpi_comms`, thereby gaining exclusive access to the serial port. This exclusivity prevents other nodes from setting the LCD screen text or reading buttons.
+- **Possible Solution:** A potential fix involves the use of a shared or global instance of `penguinpi_comms`. This adjustment could allow multiple nodes to interact with the serial port concurrently.
+
+### Handling Receiving of Unrequested Microcontroller Text Messages
+
+- **Issue:** The current implementation does not adequately handle text received from the microcontroller. This oversight leads to the `ros2_control` process crashing when the power supply is disconnected, as the microcontroller sends a message to the Pi that is not processed.
+- **Suggested Improvement:** Implement a separate read thread for handling microcontroller communications, similar to the previous Python implementation in `src/ppi_controller/ppi_controller/penguin_pi_lib/penguinPi.py -> UART -> uart_recv`. This would improve system robustness, especially during power supply disruptions, or when the .
+
+### Dependency on Libserial Repository Location
+
+- **Issue:** The current setup requires the `libserial` repository to be cloned into the user's home directory. This requirement may not be ideal in all environments and could pose a limitation in terms of flexibility and system organization.
+- **Recommendation:** Future development could focus on making the system more flexible regarding the location of the `libserial` repository, potentially allowing it to reside in different directories based on user preference or system requirements.
+
+### Alternative Approaches to Serial Communication
+
+- **Observation:** Other solutions for serial communication, such as the ROS2 Serial Bridge, have been explored. However, these packages primarily work with publishers and subscribers, which are not compatible with `ros2_control`'s intended lower-level operations.
+- **Consideration:** While integrating such packages may be technically feasible, it is not advised due to the conceptual mismatch with `ros2_control`. Future research could explore more compatible methods of serial communication that align with the low-level nature of `ros2_control`.
+ 
